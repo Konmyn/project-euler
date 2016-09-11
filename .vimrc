@@ -1,0 +1,24 @@
+set nocompatible
+syntax on
+set nu
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set cursorline
+colorscheme desert
+set nobackup
+set autochdir
+set hlsearch
+set expandtab
+set autoindent
+set smartindent
+set showmatch
+set fileencodings=utf-8,gb2312,usc-bom,cp936,euc-cn
+set termencoding=utf-8
+set encoding=utf-8
+filetype plugin on
+set history=500
+set incsearch
+set foldenable
+set foldmethod=syntax
+set wrap
