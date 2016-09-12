@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 def is_prime(number):
+    if number < 2:
+        return False
     if number == 2:
         return True
     if number%2 == 0:
         return False
     factor = 3
-    stop_num = int(number**(0.5)+1)
+    stop_num = int(pow(number, 0.5))
     while factor <= stop_num:
         if number%factor == 0:
             return False
@@ -15,6 +17,8 @@ def is_prime(number):
     return True
 
 def main():
+    print 'Program to testify your input number whether or not a prime.\n\
+Hit Ctrl+C to stop this program.'
     while True:
         in_number = input("Input the number you want to evaluate:")
         if isinstance(in_number, int):
@@ -22,15 +26,9 @@ def main():
                 print "The number you input is PRIME."
             else:
                 print "NOT prime!"
-            confirm = raw_input("Continue?(Y/n)").lower()
-            if confirm in ['yes', 'y']:
-                continue
-            else:
-                break
         else:
             print "BAD input!"
             continue
-        print "~~~~~BYE BYE!~~~~~"
 
 if __name__ == "__main__":
     main()
