@@ -1,13 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main(theNumber)
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time-start_time)
-
 def main(target):
     stop = int(target**(0.5)+1)
     number_try = 3
@@ -36,3 +29,10 @@ def is_prime(number):
     return True
 
 theNumber = 600851475143
+
+if __name__ == "__main__":
+    from timeit import default_timer
+    start_time = default_timer()
+    main(theNumber)
+    end_time = default_timer()
+    print "Time used(s): {}".format(end_time-start_time)

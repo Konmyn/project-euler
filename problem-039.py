@@ -1,13 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time-start_time)
-
 def main():
     stop_p = 1000
     p = 3
@@ -45,3 +38,10 @@ def is_right_angle_triangle(low, medium, high):
     if pow(low, 2)+pow(medium, 2) == pow(high, 2):
         return True
     return False
+
+if __name__ == "__main__":
+    from timeit import default_timer
+    start_time = default_timer()
+    main()
+    end_time = default_timer()
+    print "Time used(s): {}".format(end_time-start_time)
