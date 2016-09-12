@@ -26,7 +26,6 @@ def prime_list(upper_limit):
 def main():
     limits = 1000
     primes = prime_list(limits)
-    _length = len(primes)
     i = 1
     while sum(primes[:i])<limits:
         i += 1
