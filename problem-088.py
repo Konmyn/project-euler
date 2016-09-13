@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import itertools
+
 def prime_list(upper_limit):
     primes = [2]
     if not isinstance(upper_limit, int):
@@ -20,6 +22,29 @@ def prime_list(upper_limit):
         _is_prime = True
     return primes
 
+# seems no difference in speed with above list method
+def prime_dict(upper_limit):
+    _key = 1
+    primes = {_key: 2}
+    if not isinstance(upper_limit, int):
+        return {}
+    if upper_limit<2:
+        return {}
+    n = 3
+    _key += 1
+    _is_prime = True
+    while n<=upper_limit:
+        for v in primes.itervalues():
+            if n%v==0:
+                _is_prime = False
+                break
+        if _is_prime:
+            primes[_key] = n
+            _key += 1
+        n += 2
+        _is_prime = True
+    return primes
+
 def factor_list(number, primes):
     i = 0
     prime_factors = []
@@ -32,8 +57,8 @@ def factor_list(number, primes):
     return prime_factors
 
 def main():
-    k = 323434
-    upper_limit = k
+    k = 9699690
+    upper_limit = int(pow(k,0.5))
     primes = prime_list(upper_limit)
     factors = factor_list(k, primes)
     print "Result: {}".format(factors)
