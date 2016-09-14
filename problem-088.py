@@ -13,7 +13,7 @@ def prime_list(upper_limit):
     _is_prime = True
     while n<=upper_limit:
         for i in primes:
-            if n%i==0:
+            if not n%i:
                 _is_prime = False
                 break
         if _is_prime:
@@ -35,7 +35,7 @@ def prime_dict(upper_limit):
     _is_prime = True
     while n<=upper_limit:
         for v in primes.itervalues():
-            if n%v==0:
+            if not n%v:
                 _is_prime = False
                 break
         if _is_prime:
@@ -49,7 +49,7 @@ def factor_list(number, primes):
     i = 0
     prime_factors = []
     while primes[i]<=number:
-        if number%primes[i]==0:
+        if not number%primes[i]:
             prime_factors.append(primes[i])
             number /= primes[i]
             continue

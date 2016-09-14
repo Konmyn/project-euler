@@ -5,9 +5,9 @@ def main():
     n = 1
     target_list = []
     while n<1000:
-        if n%3 == 0:
+        if not n%3:
             target_list.append(n)
-        elif n%5 == 0:
+        elif not n%5:
             target_list.append(n)
         n += 1
     print "Result: {}".format(sum(target_list))

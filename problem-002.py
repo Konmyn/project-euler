@@ -9,7 +9,7 @@ def main():
     target_list = [2]
     while c<=fib_stop:
         c = a+b
-        if c%2 == 0:
+        if not c%2:
             target_list.append(c)
         a = b
         b = c
