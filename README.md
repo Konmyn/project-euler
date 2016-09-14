@@ -1,3 +1,3 @@
 # project-euler
-solutions for using python.
+solutions using python.
 https://projecteuler.net/
