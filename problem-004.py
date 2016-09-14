@@ -11,7 +11,7 @@ def is_palindrome(number):
         i += 1
     return True
 
-# brute force, not so good
+# brute force
 def main():
     _n = _m = _r = 0
     n = 999
