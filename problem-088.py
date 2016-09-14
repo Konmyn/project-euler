@@ -57,7 +57,7 @@ def factor_list(number, primes):
     return prime_factors
 
 def main():
-    k = 9699690
+    k = 6469693230
     upper_limit = int(pow(k,0.5))
     primes = prime_list(upper_limit)
     factors = factor_list(k, primes)
