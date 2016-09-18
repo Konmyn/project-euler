@@ -13,6 +13,14 @@ def is_palindrome(number):
     return True
 
 
+# more easy reading using list method.
+def is_palindrome2(number):
+    str_num = str(number)
+    if str_num != str_num[::- 1]:
+            return False
+    return True
+
+
 # brute force
 def main():
     _n = _m = _r = 0

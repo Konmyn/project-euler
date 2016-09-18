@@ -20,3 +20,7 @@ if __name__ == "__main__":
     main()
     end_time = default_timer()
     print "Time used(s): {}".format(end_time - start_time)
+
+if False:
+    # one line solution below:
+    print sum([x for x in xrange(1000) if not x % 3 or not x % 5])
