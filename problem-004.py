@@ -1,25 +1,27 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+
 def is_palindrome(number):
     str_num = str(number)
-    half_len = len(str_num)/2
+    half_len = len(str_num) / 2
     i = 0
-    while i<half_len:
-        if str_num[i] != str_num[-i-1]:
+    while i < half_len:
+        if str_num[i] != str_num[- i - 1]:
             return False
         i += 1
     return True
+
 
 # brute force
 def main():
     _n = _m = _r = 0
     n = 999
     stop = 99
-    while n>stop:
+    while n > stop:
         m = n
-        while m>stop:
-            prod = m*n
+        while m > stop:
+            prod = m * n
             if is_palindrome(prod):
                 if prod > _r:
                     _r = prod
@@ -29,9 +31,10 @@ def main():
         n -= 1
     print "Result: {} * {} = {}".format(_m, _n, _r)
 
+
 if __name__ == "__main__":
     from timeit import default_timer
     start_time = default_timer()
     main()
     end_time = default_timer()
-    print "Time used(s): {}".format(end_time-start_time)
+    print "Time used(s): {}".format(end_time - start_time)
