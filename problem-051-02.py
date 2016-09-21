@@ -24,23 +24,13 @@ def miller_rabin(n, k=40):
     return True
 
 
-def total_replace_test(n, digit, _endone = False):
-    str_n = str(n)
-    count_succe = 1
-    if _endone:
-        for i in range(digit + 1, 10):
-            if miller_rabin(int((str_n[:-1].replace(str(digit), '{}'.format(i)) + '1'))):
-                count_succe += 1
-    else:
-        for i in range(digit + 1, 10):
-            if miller_rabin(int(str_n.replace(str(digit), '{}'.format(i)))):
-                count_succe += 1
-    if count_succe > 7:
-        return True
-    return False
-
-def part_replace_test(n, digit, _endone = False):
-    return False
+def digits_list(n):
+    digits = []
+    while n:
+        digits.append(n%10)
+        n //= 10
+    digits = digits[::-1]
+    return digits
 
 
 def is_prime_family(n, digits):
