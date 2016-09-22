@@ -3,6 +3,29 @@
 
 
 import random
+from itertools import combinations
+
+
+def is_prime(n):
+    i = 5
+    while i * i <= n:
+        if not n % i or not n % (i + 2):
+            return False
+        i += 6
+    return True
+
+
+def by_defination_check(n, one, times):
+    i = j = 1
+    while i < times:
+        if is_prime(n + one * i):
+            j += 1
+        if j > 7:
+            return True
+        if i - j > times -8:
+            return False
+        i += 1
+    return False
 
 
 def miller_rabin(n, k=40):
@@ -24,97 +47,79 @@ def miller_rabin(n, k=40):
     return True
 
 
-def total_replace_test(n, digit, _endone = False):
-    str_n = str(n)
-    count_succe = 1
-    if _endone:
-        for i in range(digit + 1, 10):
-            if miller_rabin(int((str_n[:-1].replace(str(digit), '{}'.format(i)) + '1'))):
-                count_succe += 1
-    else:
-        for i in range(digit + 1, 10):
-            if miller_rabin(int(str_n.replace(str(digit), '{}'.format(i)))):
-                count_succe += 1
-    if count_succe > 7:
-        return True
-    return False
-
-def part_replace_test(n, digit, _endone = False):
-    return False
-
-
-def is_prime_family(n, digits):
-    if 0 in digits:
-        if total_replace_test(n, 0):
-            return True
-        if digits[0] > 2:
-            if part_replace_test(n, 0):
-                return True
-    if 1 in digits and digits['end_with_1']:
-        if total_replace_test(n, 1, True):
-            return True
-        if digits[1] > 2:
-            if part_replace_test(n, 1, True):
-                return True
-    if 1 in digits and not digits['end_with_1']:
-        if total_replace_test(n, 1):
-            return True
-        if digits[1] > 2:
-            if part_replace_test(n, 1):
-                return True
-    if 2 in digits:
-        if total_replace_test(n, 2):
-            return True
-        if digits[2] > 2:
-            if part_replace_test(n, 2):
-                return True
-    return False
+def digits_list(n):
+    n //= 10
+    digits = []
+    while n:
+        digits.append(n%10)
+        n //= 10
+    return digits
 
 
 def has_duplicate_digits(n):
-    digits_count = {'is_p': False, 'end_with_1': False}
-    n = str(n)
-    x = n.count('0')
-    if n[-1] == '1':
-        digits_count['end_with_1'] = True
-        y = n.count('1') - 1
-    else:
-        y = n.count('1')
-    z = n.count('2')
-    if x > 1:
-        digits_count['is_p'] = True
-        digits_count[0] = x
-    if y > 1:
-        digits_count['is_p'] = True
-        digits_count[1] = y
-    if z > 1:
-        digits_count['is_p'] = True
-        digits_count[2] = z
-    return digits_count
+    digits = digits_list(n)
+    x_0 = digits.count(0)
+    y_1 = digits.count(1)
+    z_2 = digits.count(2)
+    prepare = []
+    if x_0 < 2 and y_1 < 2 and z_2 < 2:
+        return False
+    if x_0 > 1:
+        prepare.append(all_factors(digits, 0, x_0))
+    if y_1 > 1:
+        prepare.append(all_factors(digits, 1, y_1))
+    if z_2 > 1:
+        prepare.append(all_factors(digits, 2, z_2))
+    return prepare
+
+
+def all_factors(digits, digit, counts):
+    n = 10
+    factors = []
+    candi = []
+    for i in digits:
+        if i == digit:
+            factors.append(n)
+        n *= 10
+    i = 2
+    while i <= counts:
+        for j in combinations(factors, i):
+            candi.append(sum(j))
+        i += 1
+    return [10 - digit, candi]
+
+
+def is_prime_family(n, lists):
+    for one in lists[1]:
+        times = 1
+        count_pass = 1
+        while times < lists[0]:
+            if miller_rabin(n + (one * times)):
+                count_pass += 1
+            if count_pass > 7:
+                if by_defination_check(n, one, lists[0]):
+                    return True
+            if times - count_pass > lists[0] - 8:
+                break
+            times += 1
+    return False
 
 
 def main():
     # there are about 5096876 primes in 8 digits number.
-    # 10000001 % 6 = 5
-    n = 10000001
-    count = 0
-    while n < 20000000:
-        result = {'is_p': False, 'end_with_1': False}
+    # 101 % 6 = 5
+    n = 101
+    step = 2
+    while True:
         if miller_rabin(n, 3):
-            result = has_duplicate_digits(n)
-        if result['is_p']:
-            if is_prime_family(n, result):
-                result = n
-                break
-        result = {'is_p': False, 'end_with_1': False}
-        if miller_rabin(n + 2, 3):
-            result = has_duplicate_digits(n)
-        if result['is_p']:
-            if is_prime_family(n + 2, result):
-                result = n + 2
-                break
-        n += 6
-    print "Result: {}".format(result)
+            ones = has_duplicate_digits(n)
+            if ones:
+                for one in ones:
+                    if is_prime_family(n, one):
+                        print "Result: {}".format(n)
+                        return
+        n += step
+        step = 6 - step
 
 
 if __name__ == "__main__":
