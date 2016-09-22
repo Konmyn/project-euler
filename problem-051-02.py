@@ -3,7 +3,7 @@
 
 
 import random
-
+from itertools import combinations
 
 def miller_rabin(n, k=40):
     r, s = 0, n - 1
@@ -29,58 +29,88 @@ def digits_list(n):
     while n:
         digits.append(n%10)
         n //= 10
-    digits = digits[::-1]
     return digits
 
 
 def is_prime_family(n, digits):
-    if 0 in digits:
-        if total_replace_test(n, 0):
-            return True
-        if digits[0] > 2:
-            if part_replace_test(n, 0):
-                return True
-    if 1 in digits and digits['end_with_1']:
-        if total_replace_test(n, 1, True):
-            return True
-        if digits[1] > 2:
-            if part_replace_test(n, 1, True):
-                return True
-    if 1 in digits and not digits['end_with_1']:
-        if total_replace_test(n, 1):
-            return True
-        if digits[1] > 2:
-            if part_replace_test(n, 1):
-                return True
-    if 2 in digits:
-        if total_replace_test(n, 2):
-            return True
-        if digits[2] > 2:
-            if part_replace_test(n, 2):
-                return True
     return False
 
 
 def has_duplicate_digits(n):
-    digits_count = {'is_p': False, 'end_with_1': False}
-    n = str(n)
-    x = n.count('0')
-    if n[-1] == '1':
-        digits_count['end_with_1'] = True
-        y = n.count('1') - 1
-    else:
-        y = n.count('1')
-    z = n.count('2')
+    digits = digits_list(n)
+    x_0 = digits.count(0)
+    y_1 = digits[:-1].count(1)
+    z_2 = digits.count(2)
+    if x_0 < 2 or y_1 < 2 or z_2 < 2:
+        return False
+    result = all_calc(digits, x_0, y_1, z_2)
+    return result
+
+
+def all_calc(digits, x=0, y=0, z=0):
+    cal_list = []
+    list_0 = []
+    list_1 = []
+    list_2 = []
     if x > 1:
-        digits_count['is_p'] = True
-        digits_count[0] = x
+        list_0.append(9)
+        list_0.append([replace_all(digits, 0)])
+        if x > 2:
+            list_0[1] += replace_2digits(digits, 0)
+            if x > 3:
+                pass
+                if x > 4:
+                    pass
+                    if x > 5:
+                        pass
+        cal_list.append(list_0)
     if y > 1:
-        digits_count['is_p'] = True
-        digits_count[1] = y
+        list_1.append(8)
+        list_1.append([replace_all(digits, 1)])
+        if x > 2:
+            list_1[1] += replace_2digits(digits, 1)
+            if x > 3:
+                pass
+                if x > 4:
+                    pass
+                    if x > 5:
+                        pass
+                        if x > 6:
+                            pass
+        cal_list.append(list_1)
     if z > 1:
-        digits_count['is_p'] = True
-        digits_count[2] = z
-    return digits_count
+        list_2.append(7)
+        list_2.append([replace_all(digits, 2)])
+        if x > 2:
+            list_2[1] += replace_2digits(digits, 2)
+            if x > 3:
+                pass
+                if x > 4:
+                    pass
+                    if x > 5:
+                        pass
+                        if x > 6:
+                            pass
+        cal_list.append(list_2)
+
+
+def all_factors(lists, digits):
+    n = 10
+    factors = []
+    for i in lists[1:]:
+        if i == digits:
+            factors.append(n)
+        n *= 10
+    count = 2
+    while count < len(factors):
+
+        count += 1
+    return factors
+
+
+def replace_2digits(lists, digits, count):
+    n = 0
+    for i in lists:
 
 
 def main():
