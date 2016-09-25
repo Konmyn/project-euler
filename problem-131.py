@@ -5,6 +5,8 @@
 import random
 
 
+# (n + x)**3 = n**3 + 3*x*n**2 + 3*n*x**2 + x**3
+# (n + 1) = n**3 + 3*n**2 + 3*n + 1
 def is_prime(n):
     if n == 2:
         return True
@@ -41,22 +43,25 @@ def miller_rabin(n, k=40):
     return True
 
 
-def is_perfect_cube(target, lower):
+def is_perfect_cube(target, lower, prime):
     n = lower + 1
-    cuded = n ** 3
-    while cuded <= target:
-        if cuded == target:
+    stop = lower + prime//3 + 1
+    cubed = n ** 3
+    while n <= stop:
+        if cubed == target:
+            print n
             return True
         n += 1
-        cuded = n ** 3
+        cubed = n ** 3
     return False
 
 
 def prime_cube(p):
-    n = 1
-    while n <= p:
+    n = p // 3
+    limit = p * 2
+    while n <= limit:
         cube = n ** 3 + n ** 2 * p
-        if is_perfect_cube(cube, n):
+        if is_perfect_cube(cube, n, p):
             return True
         n += 1
     return False
