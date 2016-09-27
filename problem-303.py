@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
+# this method cost too much time to get result.
 def f(n):
     multiple = 1
     while True:
@@ -20,7 +21,7 @@ def digits_check(n):
 
 def main():
     n = 1
-    stop = 10000
+    stop = 100
     sum_all = 0
     while n <= stop:
         sum_all += f(n)
