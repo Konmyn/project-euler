@@ -43,6 +43,7 @@ def how_many_divisors_for_one_number(number):
     return counter
 
 # find primes in order
+# +2 和 6K+/-1的方法时间一样啊，见commit历史。
 def get_primes_and_positions(limit):
     if not isinstance(limit, int):
         raise TypeError
@@ -50,7 +51,6 @@ def get_primes_and_positions(limit):
         raise ValueError
     count = 5
     the_number = 11
-    step = 2
     while count <= limit:
         stop = int(the_number**0.5)
         divisor = 3
@@ -64,9 +64,9 @@ def get_primes_and_positions(limit):
             # the nth prime and the prime.
             yield (count, the_number)
             count += 1
-        the_number += step
-        step = 6 - step
+        the_number += 2
 
+# 这道题果然比较复杂，通过简单的找规律，找到了一些皮毛，后来发现嵌套不少其他条件，可能需要动态规划解决了，分支比较多。
 # the number which have 2**6 divisor is 2*2*6*5*7*9 = 7560
 def main():
     result = 7560
