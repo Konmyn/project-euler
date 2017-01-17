@@ -11,14 +11,17 @@ def find_min_number_have_n_divisors(divisor_count):
         raise ValueError
     target = 2
     while True:
-        counter = 0
-        start = 1
+        counter = 1
+        start = 2
         stop = int(target**0.5)
         while start <= stop:
             if target % start == 0:
                 counter += 1
             start += 1
-        counter *= 2
+        if stop**2 == target:
+            counter = counter * 2 - 1
+        else:
+            counter *= 2
         if counter == divisor_count:
             break
         target += 1
@@ -39,7 +42,10 @@ def how_many_divisors_for_one_number(number):
         if number % start == 0:
             counter += 1
         start += 1
-    counter *= 2
+    if stop**2 == number:
+        counter = counter * 2 - 1
+    else:
+        counter *= 2
     return counter
 
 # find primes in order
