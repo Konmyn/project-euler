@@ -28,20 +28,10 @@ ARRAY =\
 
 
 def array_format(strings):
-    strings = strings.replace('\n', '')
-    i = 0
+    array = strings[:].strip().split('\n')
     array_list = []
-    while i < 20:
-        array_list.append(strings[i * 59: (i + 1) * 59])
-        i += 1
-    i = 0
-    for j in array_list:
-        array_list[i] = j.split(' ')
-        str_num = 0
-        for string in array_list[i]:
-            array_list[i][str_num] = int(string)
-            str_num += 1
-        i += 1
+    for i in array:
+        array_list.append([int(j) for j in i.split()])
     return array_list
 
 

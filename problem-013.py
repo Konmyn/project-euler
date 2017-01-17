@@ -108,13 +108,8 @@ NUMBERS =\
 
 
 def number_format(strings):
-    strings = strings.replace('\n', '')
-    i = 0
-    number_list = []
-    while i < 100:
-        # the lower bits won't have any effect on result, so we do not care.
-        number_list.append(int(strings[i * 50: i * 50 + 13]))
-        i += 1
+    array = strings[:].strip().split('\n')
+    number_list = [int(i) for i in array]
     return number_list
 
 
