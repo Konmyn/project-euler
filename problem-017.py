@@ -51,9 +51,12 @@ def three_digits(number):
 
 def four_digits(number):
     if number%1000:
-        return '{} {} and {}'.format(number_dict[number//100],number_dict[100],one_or_two_digits(number%100))
+        if number//100%10:
+            return '{} {}, {}'.format(number_dict[number//1000],number_dict[1000],three_digits(number%1000))
+        else:
+            return '{} {} and {}'.format(number_dict[number//1000],number_dict[1000],one_or_two_digits(number%1000))
     else:
-        return '{} {}'.format(number_dict[number//100],number_dict[100])
+        return '{} {}'.format(number_dict[number//1000],number_dict[1000])
 
 def number_to_words(number):
     digits = len(str(number))
@@ -68,12 +71,12 @@ def number_to_words(number):
 
 
 def main():
-    number = 2**1000
-    digits_sum = 0
-    while number:
-        digits_sum += number % 10
-        number //= 10
-    print "Result: {}".format(digits_sum)
+    counter = 0
+    for natural in range(1,1001):
+        text = number_to_words(natural)
+        counter += len(text)-text.count(' ')-text.count('-')
+    print "Result: {}".format(counter)
+
 
 if __name__ == "__main__":
     from timeit import default_timer
