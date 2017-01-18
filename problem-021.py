@@ -2,10 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-FLAG = 0
-
-def find_amicale(number):
-    global FLAG
+def divisor_sum(number):
     divisor = 2
     divisors = set([1])
     while divisor <= number**0.5:
@@ -13,19 +10,12 @@ def find_amicale(number):
             divisors.add(divisor)
             divisors.add(number / divisor)
         divisor += 1
-    ami = sum(divisors)
-    if FLAG:
-        if ami == FLAG:
-            return True
-        else:
-            return False
-    else:
-        FLAG = number
-    if find_amicale(ami):
-        FLAG = 0
+    return sum(divisors)
+
+def find_amicale(number):
+    if divisor_sum(divisor_sum(number)) == number and divisor_sum(number)!= number:
         return True
     else:
-        FLAG = 0
         return False
 
 def main():
