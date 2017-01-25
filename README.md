@@ -42,3 +42,8 @@ p043
 Time used(s): 3.14126086235
 p047
 Time used(s): 7.93534994125
+
+
+maybe can be better if in another way:
+p049
+Time used(s): 0.403697967529

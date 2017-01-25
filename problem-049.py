@@ -33,20 +33,41 @@ def is_prime(n):
     return True
 
 def is_permutation(x, y, z):
+    a = [0]*10
+    b = [0]*10
+    c = [0]*10
+    while x:
+        a[x%10] += 1
+        x //= 10
+    while y:
+        b[y%10] += 1
+        y //= 10
+    while z:
+        c[z%10] += 1
+        z //= 10
+    if a == b == c:
+        return True
+    else:
+        return False
 
 def main():
     gen_prime_list()
-    candidates = []
     i = len(PRIME_LIST)-1
     while i>1:
         j = i-1
         while j>0:
-            if PRIME_LIST[i]-PRIME_LIST[j] in PRIME_LIST[:j]:
-                if is_permutation(PRIME_LIST[i]-PRIME_LIST[j], PRIME_LIST[j], PRIME_LIST[i]):
-                    candidates.extend([PRIME_LIST[i]-PRIME_LIST[j], PRIME_LIST[j], PRIME_LIST[i]])
+            diff = PRIME_LIST[j]*2-PRIME_LIST[i]
+            if diff in PRIME_LIST[:j]:
+                if is_permutation(diff, PRIME_LIST[j], PRIME_LIST[i]):
+                    target = [diff, PRIME_LIST[j], PRIME_LIST[i]]
+                    if 1487 not in target:
+                        candidates = ''
+                        for num in target:
+                            candidates += str(num)
+                        print "Result: {}".format(candidates)
+                        return
             j -= 1
         i -= 1
-    print "Result: {}".format(candidates)
 
 
 if __name__ == "__main__":
