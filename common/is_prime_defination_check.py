@@ -4,6 +4,8 @@
 
 def is_prime(n):
     """Returns True if n is prime."""
+    if n < 2:
+        return False
     if n == 2:
         return True
     if n == 3:

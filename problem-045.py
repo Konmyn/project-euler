@@ -2,45 +2,59 @@
 # -*- coding: utf-8 -*-
 
 
-def gen_pen(number):
-    return number*(3*number - 1)/2
-
-def generate_pentagonal_number():
-    natural = 1
+def generate_triangle(n=1, stop=None):
+    if stop is None:
+        stop = n+1
     while True:
-        yield (natural, gen_pen(natural))
-        natural += 1
-
-def is_pentagonal(start, to_match):
-    n = start + 1
-    m = to_match
-    while gen_pen(n)<=m:
-        if gen_pen(n) == m:
-            return True
+        yield n*(n+1)/2
         n += 1
-    return False
+        if n == stop:
+            break
+    return
+
+def generate_pentagonal(n=1, stop=None):
+    if stop is None:
+        stop = n+1
+    while True:
+        yield n*(3*n-1)/2
+        n += 1
+        if n == stop:
+            break
+    return
+
+def generate_hexagonal(n=1, stop=None):
+    if stop is None:
+        stop = n+1
+    while True:
+        yield n*(2*n-1)
+        n += 1
+        if n == stop:
+            break
+    return
 
 def main():
-    pent_list = []
-    flag = 0
-    gen = generate_pentagonal_number()
-    break_loop = False
+    # T285 = P165 = H143 = 40755
+    n_tri = 286
     while True:
-        cache = gen.next()
-        pent_list.append(cache[1])
-        flag = cache[0]
-        loop, end = flag-2, flag-1
-        while loop>0:
-            if (pent_list[end]-pent_list[loop]) in pent_list[:loop]:
-                print cache
-                if is_pentagonal(end, pent_list[end]+pent_list[loop]):
-                    D = pent_list[end]-pent_list[loop]
-                    break_loop = True
-                    break
-            loop -= 1
-        if break_loop:
-            break
-    print "Result: {}".format(D)
+        x = generate_triangle(n_tri).next()
+        y = generate_pentagonal(166, n_tri)
+        while True:
+            cachey = y.next()
+            if cachey == x:
+                z = generate_hexagonal(144, n_tri)
+                while True:
+                    cachez = z.next()
+                    if cachez == x:
+                        print "Result: {}".format(x)
+                        return
+                    elif cachez>x:
+                        break
+            elif cachey>x:
+                break
+        n_tri += 1
+        if n_tri%100==0:
+            print n_tri
+
 
 if __name__ == "__main__":
     from timeit import default_timer
