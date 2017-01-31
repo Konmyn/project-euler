@@ -21,6 +21,8 @@ p039
 Time used(s): 23.1929030418
 p045
 Time used(s): 403.543560982
+p069
+Time used(s): 78.5591881275
 
 
 maybe warning tobe optimized(>1s):
@@ -48,6 +50,8 @@ p062
 Time used(s): 3.69245004654
 
 
-maybe can be better if in another way:
+maybe can be better if in another way or magic?:
 p049
 Time used(s): 0.403697967529
+p063
+Time used(s): 0.000396966934204
