@@ -8,6 +8,7 @@ p024
 p032
 p033
 
+
 to be optimized(longer than 10s):
 p010
 Time used(s): 11.432090044
@@ -23,6 +24,8 @@ p045
 Time used(s): 403.543560982
 p069
 Time used(s): 78.5591881275
+p070
+Time used(s): 429.472760916
 
 
 maybe warning tobe optimized(>1s):
