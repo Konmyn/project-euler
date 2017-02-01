@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from decimal import *
+from math import log
 
 
 LIST_EXP = []
@@ -11,7 +11,7 @@ def load_data():
     datas = []
     with open('p099_base_exp.txt') as doc:
         for line in doc:
-            datas.append(line.strip().split(','))
+            datas.append([int(number) for number in line.strip().split(',')])
     return datas
 
 def main():
@@ -19,7 +19,7 @@ def main():
     max_num = 0
     loop = len(LIST_EXP)
     for i in range(loop):
-        cache = Decimal(LIST_EXP[i][0]).log10()*Decimal(LIST_EXP[i][1])
+        cache = log(LIST_EXP[i][0])*LIST_EXP[i][1]
         if max_num < cache:
             max_num = cache
             row_number = i+1
