@@ -26,6 +26,8 @@ p069
 Time used(s): 78.5591881275
 p070
 Time used(s): 429.472760916
+p074
+Time used(s): 41.3082010746
 
 
 maybe warning tobe optimized(>1s):
