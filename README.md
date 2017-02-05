@@ -2,6 +2,9 @@
 solutions using python.
 https://projecteuler.net/
 
+reference:
+http://blog.dreamshire.com/category/project-euler-solutions/
+
 pythonic cheat/magic:
 p019
 p024
@@ -15,8 +18,6 @@ p010
 Time used(s): 11.432090044
 p014
 Time used(s): 24.4806790352
-p023
-Time used(s): 498.366440058
 p031
 Time used(s): 25.8574478626
 p039
