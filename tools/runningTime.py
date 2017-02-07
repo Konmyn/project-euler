@@ -10,19 +10,19 @@ class runTime(object):
     def __init__(self, func):
         self.func = func
 
-    def __call__(self):
-        print "Running {}".format(self.func.__name__)
+    def __call__(self, *arg):
+        print 'Running "{}"'.format(self.func.__name__)
         start_time = default_timer()
-        self.func()
+        self.func(*arg)
         end_time = default_timer()
         print "Time used(s): {}".format(end_time-start_time)
 
 # function as decorator
 def runtime(func):
-    def new_func():
-        print "Running {}".format(new_func.__name__)
+    def new_func(*arg):
+        print 'Running "{}"'.format(new_func.__name__)
         start_time = default_timer()
-        func()
+        func(*arg)
         end_time = default_timer()
         print "Time used(s): {}".format(end_time-start_time)
     new_func.__name__ = func.__name__

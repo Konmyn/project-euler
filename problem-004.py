@@ -2,47 +2,42 @@
 # -*- coding: utf-8 -*-
 
 
-def is_palindrome(number):
-    str_num = str(number)
-    half_len = len(str_num) / 2
-    i = 0
-    while i < half_len:
-        if str_num[i] != str_num[- i - 1]:
-            return False
-        i += 1
-    return True
+from tools.runningTime import runTime
+from tools.common import is_palindromic
 
 
-# more easy reading using list method.
-def is_palindrome2(number):
-    str_num = str(number)
-    if str_num != str_num[::- 1]:
-            return False
-    return True
+@runTime
+def brute_force_method(digits=3):
+    result = [0, 0, 0] #[m, n, m*n]
+    # both m,n should be odd since the result is starting with 9.
+    for n in xrange(10**digits-1, 10**(digits-1)-1, -2):
+        for m in xrange(10**digits-1, n-1, -2):
+            if result[2] >= m*n:
+                break
+            elif is_palindromic(m*n):
+                result = [m, n, m*n]
+                break
+    print "Result: {} * {} = {}".format(*result)
 
-
-# brute force
-def main():
-    _n = _m = _r = 0
-    n = 999
-    stop = 99
-    while n > stop:
-        m = n
-        while m > stop:
-            prod = m * n
-            if is_palindrome(prod):
-                if prod > _r:
-                    _r = prod
-                    _m = m
-                    _n = m
-            m -= 1
-        n -= 1
-    print "Result: {} * {} = {}".format(_m, _n, _r)
+# this method only support 3 digits number with their product is 5 digits number.
+# abccba = 100001*a + 10010*b + 1100*c = "11"*(9091*a + 910*b + 11*c)
+@runTime
+def by_finding_pattern(digits=3):
+    result = [0, 0, 0] #[m, n, m*n]
+    # both m,n should be odd since the result is starting with 9.
+    for n in xrange(10**digits-1, 10**(digits-1)-1, -2):
+        m_head = n//11 if (n//11)%2 else (n//11)-1
+        # 979=11*90 is the smallest odd number that has factor 11.
+        for m in xrange(11*m_head if n%11 else 10**digits-1,
+                         n-1, -11 if n%11 else -2):
+            if result[2] >= m*n:
+                break
+            elif is_palindromic(m*n):
+                result = [m, n, m*n]
+                break
+    print "Result: {} * {} = {}".format(*result)
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    brute_force_method()
+    by_finding_pattern()
