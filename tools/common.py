@@ -20,6 +20,7 @@ def prime_sieve(n):
 
     Algorithm & Python source: Robert William Hanks
     http://stackoverflow.com/questions/17773352/python-sieve-prime-numbers
+    http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n/18944432#18944432
     """
     sieve = [True] * (n/2)
     for i in xrange(3,int(n**0.5)+1,2):
