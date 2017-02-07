@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+
+
 # source from problem 39
 def is_right_angle_triangle(low, medium, high):
     if pow(low, 2) + pow(medium, 2) == pow(high, 2):
@@ -29,8 +32,8 @@ def right_angle_triangle_list(primeter):
         sum_ab = primeter - c
     return count
 
-
-def main():
+@runTime
+def brute_force_method():
     sum_abc = 1000
     _abc = right_angle_triangle_list(sum_abc)
     product = reduce(lambda x, y: x * y, _abc, 1)
@@ -38,8 +41,4 @@ def main():
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    brute_force_method()

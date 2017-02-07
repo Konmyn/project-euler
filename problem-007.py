@@ -51,4 +51,4 @@ def fast_prime_sieve(counts=10001):
 
 if __name__ == "__main__":
     brute_force_method()
-    fast_prime_sieve(100001)
+    fast_prime_sieve()
