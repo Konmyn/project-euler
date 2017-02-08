@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+from tools.common import prime_sieve
+
+
 # this method is source from problem 88, seems to be a bit slow.
 def prime_list(upper_limit):
     primes = [2]
@@ -47,16 +51,15 @@ def sum_prime(upper_limit):
         number += 2
     return sum_pr
 
-
-def main():
-    upper_limit = 2000000
+@runTime
+def brute_force_method(upper_limit=2*10**6):
     sum_pr = sum_prime(upper_limit)
     print "Result: {}".format(sum_pr)
 
+@runTime
+def by_prime_sieve(upper_limit=2*10**6):
+    print "Result: {}".format(sum(prime_sieve(upper_limit)))
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    brute_force_method()
+    by_prime_sieve()

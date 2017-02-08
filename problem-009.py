@@ -4,41 +4,45 @@
 
 from tools.runningTime import runTime
 
-
-# source from problem 39
-def is_right_angle_triangle(low, medium, high):
-    if pow(low, 2) + pow(medium, 2) == pow(high, 2):
-        return True
-    return False
-
-
-def right_angle_triangle_list(primeter):
+# only fit for one or none result, can not deal with 2 or more possibilities.
+def right_angle_triangle(primeter):
     # a<=b<=c, a+b+c=primeter
-    a = 1
-    b = 1
-    sum_ab = a + b
-    c = primeter - sum_ab
-    stop_point = primeter / 3
-    while c > stop_point:
-        while a <= sum_ab / 2:
-            b = sum_ab - a
-            if is_right_angle_triangle(a, b, c):
-                count = [a, b, c]
-                c = stop_point
-                break
-            a += 1
-        c -= 1
-        a = 1
-        sum_ab = primeter - c
-    return count
+    for a in xrange(1, primeter/3+1):
+        for b in xrange(a, (primeter-a)/2+1):
+            c = primeter-a-b
+            if a**2 + b**2 == c**2:
+                return [a, b, c]
+    return None
 
 @runTime
-def brute_force_method():
-    sum_abc = 1000
-    _abc = right_angle_triangle_list(sum_abc)
-    product = reduce(lambda x, y: x * y, _abc, 1)
-    print "Result: {} * {} * {} = {}".format(_abc[0], _abc[1], _abc[2], product)
+def brute_force_method(length=1000):
+    abc = right_angle_triangle(length)
+    if abc:
+        abc.append(reduce(lambda x, y: x * y, abc, 1))
+        print "Result: {} * {} * {} = {}".format(*abc)
+    else:
+        print "Result: None"
+
+def divisors(n):
+    for i in xrange(1, int(n**0.5)+1):
+        if n%i == 0:
+            yield i, n/i
+
+# a, b, c actually is Pythagorean triplet.
+# https://en.wikipedia.org/wiki/Pythagorean_theorem
+# below function use Dickson’s method
+# https://en.wikipedia.org/wiki/Formulas_for_generating_Pythagorean_triples
+@runTime
+def by_formula(length=1000):
+    pn = {}
+    for r in range(int(length**0.5)/2*2, length/5, 2):
+        st = r*r / 2
+        for s, t in divisors(st):
+            x = (r+s) + (r+t) + (r+s+t)
+            pn[x] = (r+s) * (r+t) * (r+s+t)
+    print "Result:", pn[length] if length in pn else "None"
 
 
 if __name__ == "__main__":
     brute_force_method()
+    by_formula()
