@@ -28,7 +28,6 @@ def prime_list(upper_limit):
         _is_prime = True
     return primes
 
-
 # 80 (644s to 8.5s)times faster than function above in my A53SV.
 def sum_prime(upper_limit):
     sum_pr = 2
