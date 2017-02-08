@@ -68,7 +68,7 @@ def integreted():
             if i<rows-size:
                 pdd = max(g[i][j] * g[i+1][j+1] * g[i+2][j+2] * g[i+3][j+3],
                           g[i+3][j] * g[i+2][j+1] * g[i+1][j+2] * g[i][j+3])
-        target = max(target, phv, pdd)
+            target = max(target, phv, pdd)
     print "Result: {}".format(target)
 
 
