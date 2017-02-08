@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+
+
 def chain_length(number):
     length = 1
     while number != 1:
@@ -13,22 +16,16 @@ def chain_length(number):
             length += 1
     return length
 
-
-def main():
-    number = 1
+@runTime
+def brute_force_method(limit=10**6):
     max_length = 0
-    while number < 1000000:
-        length = chain_length(number)
+    for n in xrange(1, limit):
+        length = chain_length(n)
         if length > max_length:
             max_length = length
-            target = number
-        number += 1
+            target = n
     print "Result: {} has longest chain {}".format(target, max_length)
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    brute_force_method()
