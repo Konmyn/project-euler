@@ -2,21 +2,19 @@
 # -*- coding: utf-8 -*-
 
 
-def main():
-    dis_set = set()
-    a = 2
-    while a<=100:
-        b = 2
-        while b<=100:
-            dis_set.add(a**b)
-            b += 1
-        a += 1
-    print "Result: {}".format(len(dis_set))
+from tools.runningTime import runTime
+
+
+@runTime
+def bruteForce(B=2, E=100):
+    l = xrange(B, E+1)
+    print "Result: {}".format(len({a**b for a in l for b in l}))
+
+@runTime
+def generalBruteForce(aB=2, aE=100, bB=2, bE=100):
+    print "Result: {}".format(len({a**b for a in xrange(aB, aE+1) for b in xrange(bB, bE+1)}))
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    generalBruteForce()

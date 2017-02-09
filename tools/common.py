@@ -37,6 +37,12 @@ def permutation(n, s):
    q, r = divmod(n, ft(len(s)-1))
    return s[q] + permutation(r, s[:q] + s[q+1:])
 
+def DigitsPowerSum(n, exp):
+    dps = 0
+    while n:
+        dps, n = dps+(n%10)**exp, n/10
+    return dps
+
 def prime_sieve(n):
     """
     Return a list of prime numbers from 2 to a prime < n. Very fast (n<10,000,000) in 0.4 sec.

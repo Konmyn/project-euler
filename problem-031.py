@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-def main():
+from tools.runningTime import runTime
+
+
+@runTime
+def BruteForce():
     n200 = 0
     counter = 0
     while n200<=1:
@@ -36,8 +40,4 @@ def main():
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    BruteForce()
