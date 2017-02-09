@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
+import operator as op
+from math import sqrt
+from math import factorial as ft
+
+
 # fast easy reading by string and list method.
 def is_palindromic(n):
     # # data type check if necessary
@@ -9,6 +14,28 @@ def is_palindromic(n):
     #     raise TypeError
     n = str(n)
     return n == n[::- 1]
+
+# from math import factorial
+# or you can do above if you want:)
+def factorial(n): return reduce(op.mul, xrange(1, n+1), 1)
+
+# A positive proper divisor is a positive divisor of a number n, excluding n itself.
+# For example, 1, 2, and 3 are positive proper divisors of 6, but 6 itself is not.
+def proper_divisors_sum(n):
+    s, t = 1, sqrt(n)
+    for i in xrange(2, int(t)+1):
+        if n%i == 0:
+            s += i + n/i
+    if t == int(t): s -= int(t)
+    return s
+
+# https://en.wikipedia.org/wiki/Permutation
+# permutations count from zero.
+# return the (n-1)th permutation of string s.
+def permutation(n, s):
+   if len(s)==1: return s
+   q, r = divmod(n, ft(len(s)-1))
+   return s[q] + permutation(r, s[:q] + s[q+1:])
 
 def prime_sieve(n):
     """

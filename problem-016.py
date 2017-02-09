@@ -2,17 +2,20 @@
 # -*- coding: utf-8 -*-
 
 
-def main():
-    number = 2**1000
+from tools.runningTime import runTime
+
+
+@runTime
+def on_my_own(number=2**1000):
     digits_sum = 0
     while number:
-        digits_sum += number % 10
-        number //= 10
+        digits_sum, number = digits_sum + number % 10, number/10
     print "Result: {}".format(digits_sum)
 
+@runTime
+def short_expression(n=2**1000):
+    print "Result: {}".format(sum(map(int, str(n))))
+
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    on_my_own()
+    short_expression()

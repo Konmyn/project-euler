@@ -2,18 +2,21 @@
 # -*- coding: utf-8 -*-
 
 
-def main():
-    product = reduce(lambda x, y: x*y, range(1, 101))
-    the_sum = 0
+from tools.runningTime import runTime
+from tools.common import factorial as f
+
+# Python has inherent large precision integers.
+@runTime
+def on_my_own(natural=100):
+    product, the_sum = f(natural), 0
     while product:
-        the_sum += product%10
-        product //= 10
+        the_sum, product = the_sum+product%10, product/10
     print "Result: {}".format(the_sum)
 
+@runTime
+def one_line(natural=100):
+    print "Result: {}".format(sum(map(int, str(f(natural)))))
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    on_my_own()
+    one_line()

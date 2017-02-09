@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+
+from tools.runningTime import runTime
+
+
 number_dict = {
     0 : 'zero',
     1 : 'one',
@@ -69,18 +73,11 @@ def number_to_words(number):
     else:
         return
 
-
-def main():
-    counter = 0
-    for natural in range(1,1001):
-        text = number_to_words(natural)
-        counter += len(text)-text.count(' ')-text.count('-')
-    print "Result: {}".format(counter)
+@runTime
+def on_my_own():
+    s = lambda T:len(T)-T.count(' ')-T.count('-')
+    print "Result: {}".format(sum(map(s, map(number_to_words, xrange(1,1001)))))
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    on_my_own()

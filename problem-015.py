@@ -2,28 +2,38 @@
 # -*- coding: utf-8 -*-
 
 
-LENGTH = 21
+from tools.runningTime import runTime
+from tools.common import factorial as f
 
-def array_generate():
-    a_list = [0]*LENGTH
-    array = []
-    for i in range(LENGTH):
-        array.append(a_list[:])
-    return array
 
-def main():
-    array = array_generate()
-    for i in range(LENGTH):
-        array[0][i] = 1
-        array[i][0] = 1
-    for i in range(1, LENGTH):
-        for j in range(1, LENGTH):
-            array[i][j] = array[i-1][j] + array[i][j-1]
-    print "Result: {}".format(array[LENGTH-1][LENGTH-1])
+def grid_generate(edge=20):
+    row = [0]*(edge+1)
+    grid = []
+    for i in xrange(edge+1):
+        grid.append(row[:])
+    return grid
+
+@runTime
+def on_my_own(edge=20):
+    grid = grid_generate(edge)
+    for i in xrange(edge+1):
+        grid[0][i] = 1
+        grid[i][0] = 1
+    for i in xrange(1, edge+1):
+        for j in xrange(1, edge+1):
+            grid[i][j] = grid[i-1][j] + grid[i][j-1]
+    print "Result: {}".format(grid[edge][edge])
+
+# Pascal's triangle
+# https://en.wikipedia.org/wiki/Pascal's_triangle
+# Central binomial coefficients: binomial(2*n,n) = (2*n)!/(n!)^2
+# https://oeis.org/A000984
+# Catalan number
+# https://en.wikipedia.org/wiki/Catalan_number
+@runTime
+def by_formula(eh=20, ev=20):
+    print "Result: {}".format(f(eh+ev)/f(eh)/f(ev))
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    on_my_own()
+    by_formula()

@@ -2,36 +2,37 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+from tools.common import proper_divisors_sum as ps
+
+
 def divisor_sum(number):
-    divisor = 2
-    divisors = set([1])
-    while divisor <= number**0.5:
+    divisor, divisors = 2, set([1])
+    while divisor*divisor <= number:
         if not number % divisor:
             divisors.add(divisor)
             divisors.add(number / divisor)
         divisor += 1
     return sum(divisors)
 
-def find_amicale(number):
-    if divisor_sum(divisor_sum(number)) == number and divisor_sum(number)!= number:
-        return True
-    else:
-        return False
-
-def main():
-    amicable = set()
-    natural = 2
-    while natural < 10000:
-        if find_amicale(natural):
-            amicable.add(natural)
-        natural += 1
-    print amicable
+@runTime
+def brute_force_method(limit=10000):
+    amicable = []
+    for natural in range(2, limit):
+        if divisor_sum(divisor_sum(natural)) == natural and\
+           divisor_sum(natural) != natural:
+            amicable.append(natural)
     print "Result: {}".format(sum(amicable))
+
+@runTime
+def amicable_sum(L=10000):
+    s = 0
+    for i in xrange(2, L):
+        ds = ps(i)
+        if ds>i and ps(ds)==i: s += ds+i
+    print "Result: {}".format(s)
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    brute_force_method()
+    amicable_sum()
