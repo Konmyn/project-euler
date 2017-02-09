@@ -14,16 +14,12 @@ def is_prime(n):
         return False
     if n % 3 == 0:
         return False
-
     i = 5
-
     # a prime (except 2 and 3) is of form 6k - 1 or 6k + 1
     while i * i <= n:
         if not n % i or not n % (i + 2):
             return False
-
         i += 6
-
     return True
 
 

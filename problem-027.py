@@ -2,53 +2,35 @@
 # -*- coding: utf-8 -*-
 
 
-def quadratics_form(n, a, b):
-    return (n**2 + a*n + b)
+from tools.runningTime import runTime
+from tools.common import prime_sieve, is_prime
 
-def is_prime(n):
-    if n < 2:
-        return False
-    """Returns True if n is prime."""
-    if n == 2:
-        return True
-    if n == 3:
-        return True
-    if n % 2 == 0:
-        return False
-    if n % 3 == 0:
-        return False
-    i = 5
-    # a prime (except 2 and 3) is of form 6k - 1 or 6k + 1
-    while i * i <= n:
-        if not n % i or not n % (i + 2):
-            return False
-        i += 6
-    return True
 
-def main():
+@runTime
+def bruteForce():
     record = {'a':0, 'b':0, 'len':0}
-    a = -999
-    while a<1000:
-        b = -1000
-        while b<=1000:
+    for a in xrange(-999, 1000):
+        for b in xrange(-1000, 1001):
             n = 0
-            chain_len = 0
-            while is_prime(quadratics_form(n, a, b)):
+            while is_prime(n*n+a*n+b):
                 n += 1
-                chain_len += 1
-            if chain_len > record['len']:
-                record['a'] = a
-                record['b'] = b
-                record['len'] = chain_len
-                print record
-            b += 1
-        a += 1
+            if n > record['len']:
+                record.update({'a':a, 'b':b, 'len':n})
     print "Result: {}".format(record['a']*record['b'])
+
+@runTime
+def afterAnalysis():
+    nmax = 0
+    for b in prime_sieve(1001):
+        for a in xrange(-b+2, 0, 2):
+            n = 1
+            while is_prime(n*n+a*n+b):
+                n += 1
+            if n>nmax:
+                nmax, p = n, (a,b)
+    print "Result: {}".format(p[0]*p[1])
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    afterAnalysis()

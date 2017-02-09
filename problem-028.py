@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+
+
 def generate_diagonal(edge_length):
     round_end = 1
     edge = 1
@@ -12,20 +15,21 @@ def generate_diagonal(edge_length):
         step = edge-1
         round_end += step*4
 
-def main():
-    dia = generate_diagonal(1001)
-    total_sum = -3 #!!!!!!
-    while True:
-        try:
-            total_sum += sum(dia.next())
-        except StopIteration:
-            break
-    print "Result: {}".format(total_sum)
+@runTime
+def bruteForce(edge=1001):
+    if edge == 1:
+        print "Result: 1"
+        return
+    print "Result: {}".format(sum(map(sum, generate_diagonal(edge)))-3)
+
+# https://en.wikipedia.org/wiki/Summation#Some_summations_of_polynomial_expressions
+# https://www.hackerrank.com/contests/projecteuler/challenges/euler028
+@runTime
+def byFormula(edge=1001):
+    s = (edge-1)/2
+    print "Result: {}".format((16*s*s*s + 30*s*s + 26*s + 3)/3)
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    byFormula()

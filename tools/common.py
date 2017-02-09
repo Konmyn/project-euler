@@ -54,3 +54,37 @@ def prime_sieve(n):
         if sieve[i/2]:
             sieve[i*i/2::i] = [False] * ((n-i*i-1)/(2*i)+1)
     return [2] + [2*i+1 for i in xrange(1,n/2) if sieve[i]]
+
+# this function is based on the defination of prime.
+def is_prime(n):
+    """Returns True if n is prime."""
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n == 3:
+        return True
+    if n % 2 == 0:
+        return False
+    if n % 3 == 0:
+        return False
+    i = 5
+    # a prime (except 2 and 3) is of form 6k - 1 or 6k + 1
+    while i * i <= n:
+        if not n % i or not n % (i + 2):
+            return False
+        i += 6
+    return True
+
+# below method seems slightly different but is no faster.
+# def is_prime(n):
+#     if n <= 1: return False
+#     if n <= 3: return True
+#     if n%2==0 or n%3 == 0: return False
+#     r = int(sqrt(n))
+#     f = 5
+#     while f <= r:
+#         if n%f == 0 or n%(f+2) == 0: return False
+#         f+= 6
+#     return True
+
