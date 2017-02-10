@@ -38,6 +38,12 @@ def BruteForce():
         n200 += 1
     print "Result: {}".format(counter)
 
+# http://www.algorithmist.com/index.php/Coin_Change
+# http://blog.dreamshire.com/project/dyn_prog.pdf
+@runTime
+def DPSolution():
+
+
 
 if __name__ == "__main__":
     BruteForce()
