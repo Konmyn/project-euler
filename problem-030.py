@@ -27,7 +27,7 @@ def oneMoreDigit():
             target.append(i)
     print target
 
-# the key is to find the edge of this list.
+# the key is to find the bounds of this list.
 @runTime
 def bruteForce(exp=5):
     # one obvious up-edge is 9**5*6 = 354294
