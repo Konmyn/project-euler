@@ -15,6 +15,13 @@ def is_palindromic(n):
     n = str(n)
     return n == n[::- 1]
 
+# check if n is pandigital or not.
+# We shall say that an n-digit number is pandigital
+# if it makes use of all the digits 1 to n exactly once
+def is_pandigital(n, s=9):
+    n=str(n);
+    return len(n)==s and not '1234567890'[:s].strip(n)
+
 # from math import factorial
 # or you can do above if you want:)
 def factorial(n): return reduce(op.mul, xrange(1, n+1), 1)
