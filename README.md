@@ -5,19 +5,14 @@ https://projecteuler.net/
 reference:
 http://blog.dreamshire.com/category/project-euler-solutions/
 
-pythonic cheat/magic:
-p019
-p024
-p032
-p033
-p080
+on study:
+
+p024 ->permutation
+p031 ->dp problem
+p033 ->don't understand this magic
 
 
 to be optimized(longer than 10s):
-p010
-Time used(s): 11.432090044
-p014
-Time used(s): 24.4806790352
 p031
 Time used(s): 25.8574478626
 p039
@@ -35,12 +30,6 @@ Time used(s): 13.5491878986
 
 
 maybe warning tobe optimized(>1s):
-p007
-Time used(s): 3.89543700218
-p012
-Time used(s): 6.80534315109
-p027
-Time used(s): 3.4188849926
 p034
 Time used(s): 3.96183800697
 p035

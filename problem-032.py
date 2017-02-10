@@ -21,6 +21,8 @@ def bruteForce():
 @runTime
 def newBruteForce():
     p = set()
+    # if you must use brute force, choose the start and stop point wisely.
+    # so where 60 came from?
     for i in range(2, 60):
         start = 1234 if i<10 else 123
         for j in range(start, 10000/i):
