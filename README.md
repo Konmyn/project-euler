@@ -10,13 +10,13 @@ on study:
 p024 ->permutation
 p031 ->dp problem
 p033 ->don't understand this magic
+p034 ->factorions
+p039 ->how to find bounds
 
 
 to be optimized(longer than 10s):
 p031
 Time used(s): 25.8574478626
-p039
-Time used(s): 23.1929030418
 p045
 Time used(s): 403.543560982
 p069

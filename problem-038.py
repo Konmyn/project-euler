@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+from tools.common import is_pandigital
+
+
 target = []
 
 def list_init():
@@ -30,7 +34,8 @@ def pass_to_list(number, num_list):
     if len(set(strings)) == 9:
         target.append(int(strings))
 
-def main():
+@runTime
+def bruteForce():
     num_list = list_init()
     for nums in num_list:
         start, limit = seek_edge(nums[:])
@@ -40,10 +45,19 @@ def main():
     print target
     print "Result: {}".format(max(target))
 
+# read the question.
+# find out the bound and narrow it as possible.
+# 需要花在思考上面的时间多于编程的时间。
+@runTime
+def smartBruteForce():
+    for i in xrange(9487, 9123, -1):
+        r = i*10**5+2*i
+        if is_pandigital(r, 9):
+            print "Result: {}".format(r)
+            return
+    print "None Found."
+
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    smartBruteForce()
