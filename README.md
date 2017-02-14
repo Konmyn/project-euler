@@ -4,6 +4,7 @@ https://projecteuler.net/
 
 reference:
 http://blog.dreamshire.com/category/project-euler-solutions/
+http://www.mathblog.dk/category/solutions/project-euler/
 
 on study:
 
