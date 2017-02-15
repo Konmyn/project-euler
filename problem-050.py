@@ -2,35 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-def is_prime(number):
-    if number == 2:
-        return True
-    if not number % 2:
-        return False
-    factor = 3
-    stop_num = int(pow(number, 0.5))
-    while factor <= stop_num:
-        if not number % factor:
-            return False
-        factor += 2
-    return True
+from tools.runningTime import runTime
+from tools.common import prime_sieve
 
 
-def prime_list(upper_limit):
-    n = 2
-    list_primes = []
-    while n <= upper_limit:
-        if is_prime(n):
-            list_primes.append(n)
-        n += 1
-    return list_primes
-
-
-def main():
-    limits = 1000
-    primes = prime_list(limits)
+@runTime
+def bruteForce(L=10**6):
+    primes = prime_sieve(L)
     i = 1
-    while sum(primes[:i]) < limits:
+    while sum(primes[:i]) < L:
         i += 1
     i -= 1
     max_possible = i
@@ -46,10 +26,11 @@ def main():
     i += 1
     print "Result: {}".format(sum(primes[j:j + i]))
 
+# Prime Sums
+# http://mathworld.wolfram.com/PrimeSums.html
+@runTime
+def newBruteForce(L=10**6):
+
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()

@@ -13,13 +13,12 @@ p031 ->dp problem
 p033 ->don't understand this magic
 p034 ->factorions
 p039 ->how to find bounds
+p188 ->modulo operation
 
 
 to be optimized(longer than 10s):
 p031
 Time used(s): 25.8574478626
-p045
-Time used(s): 403.543560982
 p069
 Time used(s): 78.5591881275
 p070
@@ -37,8 +36,6 @@ p035
 Time used(s): 3.80138778687
 p037
 Time used(s): 1.97637295723
-p041
-Time used(s): 1.43615221977
 p043
 Time used(s): 3.14126086235
 p047
@@ -50,7 +47,6 @@ Time used(s): 3.69245004654
 
 
 maybe can be better if in another way or magic?:
-p049
-Time used(s): 0.403697967529
+
 p063
 Time used(s): 0.000396966934204

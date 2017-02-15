@@ -2,35 +2,19 @@
 # -*- coding: utf-8 -*-
 
 
-PRIME_LIST = []
+from operator import add
+from tools.runningTime import runTime
+from tools.common import is_prime, is_perm
 
-def gen_prime_list(start=1000, stop=9999):
-    number = start
-    while number<=stop:
+
+def gen_prime_list(start=1001, stop=9999):
+    PRIME_LIST = []
+    for number in xrange(start, stop+1, 2):
         if is_prime(number):
             PRIME_LIST.append(number)
-        number += 1
-    return
-
-def is_prime(n):
-    """Returns True if n is prime."""
-    if n < 2:
-        return False
-    if n == 2:
-        return True
-    if n == 3:
-        return True
-    if n % 2 == 0:
-        return False
-    if n % 3 == 0:
-        return False
-    i = 5
-    # a prime (except 2 and 3) is of form 6k - 1 or 6k + 1
-    while i * i <= n:
-        if not n % i or not n % (i + 2):
-            return False
-        i += 6
-    return True
+    for i in [1487, 4817, 8147]:
+        PRIME_LIST.remove(i)
+    return PRIME_LIST
 
 def is_permutation(x, y, z):
     a = [0]*10
@@ -50,29 +34,27 @@ def is_permutation(x, y, z):
     else:
         return False
 
-def main():
-    gen_prime_list()
-    i = len(PRIME_LIST)-1
-    while i>1:
-        j = i-1
-        while j>0:
+@runTime
+def bruteForce():
+    PRIME_LIST = gen_prime_list()
+    for i in xrange(len(PRIME_LIST)-1, 1, -1):
+        for j in xrange(i-1, 0, -1):
             diff = PRIME_LIST[j]*2-PRIME_LIST[i]
-            if diff in PRIME_LIST[:j]:
-                if is_permutation(diff, PRIME_LIST[j], PRIME_LIST[i]):
-                    target = [diff, PRIME_LIST[j], PRIME_LIST[i]]
-                    if 1487 not in target:
-                        candidates = ''
-                        for num in target:
-                            candidates += str(num)
-                        print "Result: {}".format(candidates)
-                        return
-            j -= 1
-        i -= 1
+            if diff in PRIME_LIST[:j] and is_permutation(diff, PRIME_LIST[j], PRIME_LIST[i]):
+                target = [diff, PRIME_LIST[j], PRIME_LIST[i]]
+                print "Result: {}".format(reduce(add, [str(i) for i in target]))
+                return
+
+# this problem is not very clearly descripted.
+@runTime
+def newBruteForce():
+    n = 1489
+    while not (is_prime(n) and is_prime(n+3330) and is_prime(n+6660) and\
+              is_perm(n, n+3330) and is_perm(n, n+6660)):
+          n += 2
+    print "Result: {}".format(str(n)+str(n+3330)+str(n+6660))
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    newBruteForce()

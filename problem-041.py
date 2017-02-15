@@ -2,57 +2,37 @@
 # -*- coding: utf-8 -*-
 
 
-import random
 from itertools import permutations
+from tools.runningTime import runTime
+from tools.common import is_prime, is_pandigital
 
-def miller_rabin(n, k=20):
-    if n == 2:
-        return True
-    if n % 2 == 0:
-        return False
-    r, s = 0, n - 1
-    while s % 2 == 0:
-        r += 1
-        s //= 2
-    for _ in xrange(k):
-        a = random.randrange(2, n - 1)
-        x = pow(a, s, n)
-        if x == 1 or x == n - 1:
-            continue
-        for _ in xrange(r - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                break
-        else:
-            return False
-    return True
 
-def concatenate_tuple(num_tuple):
-    number = 0
-    for n in num_tuple:
-        number = number*10 + n
-    return number
+@runTime
+def byPermutation():
+    np = set([2, 4, 5, 6, 8])
+    # for expamle, 1->9 pandigital, its digits sum is 45,
+    # which can be devide by 3, not prime of course.
+    # so only 7, 4 pandigital is possible.
+    for limit in [7, 4]:
+        for perm in permutations(xrange(limit, 0, -1)):
+            if perm[-1] in np:
+                continue
+            n = reduce(lambda x,y: 10*x+y, perm)
+            # if miller_rabin(n):
+            # double check, make it sure.
+            if is_prime(n):
+                print "Result: {}".format(n)
+                return
 
-def main():
-    findit = False
-    for limit in range(3, 11)[::-1]:
-        perm = permutations(range(1, limit)[::-1])
-        while True:
-            try:
-                num = concatenate_tuple(perm.next())
-                if miller_rabin(num):
-                    findit = True
-                    break
-            except StopIteration:
-                break
-        if findit == True:
-            break
-    print "Result: {}".format(num)
+@runTime
+def newBruteForce():
+    # write like this because we 'already' 'know' the result is 7 digits.
+    n = 7654321
+    while not (is_pandigital(n, 7) and is_prime(n)):
+        n -= 2
+    print "Result: {}".format(n)
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    byPermutation()
+    newBruteForce()

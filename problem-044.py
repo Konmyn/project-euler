@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-def main():
+from tools.runningTime import runTime
+
+
+@runTime
+def bruteForce():
     # set() is a key data structure, use list would cause 100+ times time cost.
     pent_set = set()
     i = 0
@@ -17,8 +21,4 @@ def main():
 
 
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
