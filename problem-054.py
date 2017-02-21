@@ -34,7 +34,7 @@ def pokerAnalysis(hands):
             r[8] = 9 # Straight Flush
         if cache[-1]==12:
             r[9] = 10 # Royal Flush
-        return (r, [cache[-1]])
+        return (r, cache[::-1])
     if len(set(cache))==2:
         if 4 in buffer:
             r[7] = 8 # Four of a Kind
@@ -69,14 +69,21 @@ pv = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 pc = ['C', 'D', 'H', 'S']
 def is_player1_wins(poker):
     p1, p2 = pokerAnalysis(poker[:5]), pokerAnalysis(poker[5:])
-    print p1, p2
-
+    if max(p1[0])>max(p2[0]):
+        return True
+    elif max(p1[0])<max(p2[0]):
+        return False
+    else:
+        for i in range(len(p1[1])):
+            if p1[1][i]>p2[1][i]:
+                return True
+        return False
 
 @runTime
 def brute_force_method(uplimit=10**3):
     pw = 0  #player 1 wins counter, initalize to 0.
     pokers = [i.rstrip().split() for i in open("p054_poker.txt").readlines()]
-    for poker in pokers[:5]:
+    for poker in pokers:
         pw += 1 if is_player1_wins(poker) else 0
     print "Result: {}".format(pw)
 
