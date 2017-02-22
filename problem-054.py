@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
+from collections import Counter
 from tools.runningTime import runTime
 
 
@@ -98,9 +99,6 @@ def brute_force_method(uplimit=10**3):
     for poker in pokers:
         pw += 1 if is_player1_wins(poker) else 0
     print "Result: {}".format(pw)
-
-from collections import Counter
-from urllib2 import urlopen
 
 @runTime
 def trick():
