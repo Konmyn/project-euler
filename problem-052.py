@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+from tools.runningTime import runTime
+
+
 def contain_same_digits(n):
     counter = [0]*10
     cache = n
@@ -18,12 +21,14 @@ def contain_same_digits(n):
             return False
     return True
 
-def main():
+@runTime
+def bruteForce():
+    # start from 10
     power = 1
     while True:
         natural = pow(10, power)
-        limit = int((1+2.0/3)*pow(10, power))
-        while natural<=limit:
+        limit = 10*natural
+        while natural*6<limit:
             if contain_same_digits(natural):
                 print "Result: {}".format(natural)
                 return
@@ -31,9 +36,15 @@ def main():
         power += 1
 
 
+@runTime
+def byMagic():
+    f = lambda n:sorted(str(n))
+    n = 99999
+    while not f(n*2) == f(n*3) == f(n*4) == f(n*5) ==f(n*6):
+        n += 9
+    print "Result: {}".format(n)
+
+
 if __name__ == "__main__":
-    from timeit import default_timer
-    start_time = default_timer()
-    main()
-    end_time = default_timer()
-    print "Time used(s): {}".format(end_time - start_time)
+    bruteForce()
+    byMagic()
