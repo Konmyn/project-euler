@@ -43,6 +43,7 @@ def singleBruteForce():
                 s = ''.join(map(chr, cp))
                 if word in s:
                     print "Result: {}".format(sum(cp))
+                    return
 
 if __name__ == "__main__":
     bruteForce()
