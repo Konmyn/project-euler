@@ -29,6 +29,7 @@ def bruteForce():
                     re = [count, cp]
     print "Result: {}".format(sum(re[1]))
 
+# think it simple at your first thought!
 @runTime
 def singleBruteForce():
     word = ' the '
